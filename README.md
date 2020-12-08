@@ -22,9 +22,9 @@ Game developers can use this system to generate side quests aside from the main 
 Github for code share and documentation.
 
 ## Contributions of Team Members
-Trained GPT2 Model:						Garrett
-GPT2 output to wave function input conversion:			Xianda
-Petrarch configuration: 						Xianda
-Wave function generator configuration:				Garrett & Xianda
-Player input to GPT2 input conversion:				Garrett
-Deliverable Reports:						              Garrett & Xianda
+Trained GPT2 Model:						Garrett<br>
+GPT2 output to wave function input conversion:			Xianda<br>
+Petrarch configuration: 						Xianda<br>
+Wave function generator configuration:				Garrett & Xianda<br>
+Player input to GPT2 input conversion:				Garrett<br>
+Deliverable Reports:						              Garrett & Xianda<br>
