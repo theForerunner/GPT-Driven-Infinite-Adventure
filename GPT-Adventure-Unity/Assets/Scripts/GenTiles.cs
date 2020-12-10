@@ -57,51 +57,10 @@ public class GenTiles : MonoBehaviour
         authoredWeights.Add("watercorner 2", 0.01f);
         authoredWeights.Add("watercorner 3", 0.01f);
 
-        SimpleTiledModel model = new SimpleTiledModel("data", 30, 10, false);
+        SimpleTiledModel model = new SimpleTiledModel("data", 20, 12, false);
         bool finished = model.Run(1235, 300, authoredTiles, authoredWeights);
-        //bool finished = model.Run(1240, 300, null);
-        model.Graphics(pathingMap, collisionMap);
-        //if (test_tile)
-        //{
-        //    map.SetTile(new Vector3Int(-5, 0, 0), test_tile);
-        //    map.SetTile(new Vector3Int(-5, 1, 0), test_tile);
-        //    map.SetTile(new Vector3Int(-5, 2, 0), test_tile);
-        //    map.SetTile(new Vector3Int(-5, 3, 0), test_tile);
-        //    Matrix4x4 matrix;
-        //    matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, 90f), Vector3.one);
-        //    map.SetTransformMatrix(new Vector3Int(-5, 0, 0), matrix);
-        //    matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, -90f), Vector3.one);
-        //    map.SetTransformMatrix(new Vector3Int(-5, 1, 0), matrix);
-        //    matrix = Matrix4x4.TRS(new Vector3(0, 48, 0), Quaternion.Euler(0f, 0f, 0f), new Vector3(1f, -1f, 1f));
-        //    map.SetTransformMatrix(new Vector3Int(-5, 2, 0), matrix);
-        //}
-        //Tile test_tile_2 = Resources.Load<Tile>("roadturn 0");
-        //int i, j;
-        //for (i = -10; i < 10; ++i)
-        //{
-        //
-        //    for (j = -10; j < 0; ++j)
-        //    {
-        //        if (test_tile)
-        //        {
-        //            Matrix4x4 matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, (i * 90f) % 360f), Vector3.one);
-        //            map.SetTile(new Vector3Int(i, j, 0), test_tile);
-        //            map.SetTransformMatrix(new Vector3Int(i, j, 0), matrix);
-        //        }
-        //        //map.SetTileFlags
-        //    }
-        //    for (j = 0; j < 10; ++j)
-        //    {
-        //        if (test_tile_2)
-        //        {
-        //            Matrix4x4 matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, (i * 90f) % 360f), Vector3.one);
-        //            map.SetTile(new Vector3Int(i, j, 0), test_tile_2);
-        //            map.SetTransformMatrix(new Vector3Int(i, j, 0), matrix);
-        //        }
-        //        //map.SetTileFlags
-        //    }
-        //}
 
+        model.Graphics(pathingMap, collisionMap);
 
     }
 
@@ -117,15 +76,11 @@ public class GenTiles : MonoBehaviour
 public class WFCTile
 {
     public Tile tile = null;
-    //public char symmetry;
-    //public float weight = 1.0f;
     public string name;
 
+    public bool collides = false;
     public int rotation = 0;
     public int reflection = 0;
-    //public List<string> adjacency = new List<string>();
-
-
 
     public WFCTile(string name)
     {
@@ -141,22 +96,6 @@ public class WFCTile
         Debug.Log($"set rotation for {name} to {this.rotation}");
     }
 }
-
-//[System.Serializable]
-//public class WFCPalette
-//{
-//    public Dictionary<string, WFCTile> tiles = new Dictionary<string, WFCTile>();
-//    public bool unique = false;
-//    public int tilesize = 16;
-//
-//    public WFCPalette(string name)
-//    {
-//        XElement xroot = XDocument.Load("Assets/Tilemap/data.xml").Root;
-//        tilesize = xroot.Get("size", tilesize);
-//        unique = xroot.Get("unique", unique);
-//    }
-//
-//}
 
 
 static class Stuff
@@ -257,7 +196,7 @@ abstract class Model
         stack = new (int, int)[wave.Length * T];
         stacksize = 0;
     }
-    
+
     void InitAuthored(Dictionary<Vector2Int, int> authoredPreset)
     {
         foreach (Vector2Int key in authoredPreset.Keys)
@@ -272,46 +211,6 @@ abstract class Model
                     Ban(wave_index, t);
                 }
             }
-            //sumsOfOnes[wave_index] = 1;
-            //sumsOfWeights[wave_index] = weights[value];
-            //sumsOfWeightLogWeights[wave_index] = weightLogWeights[value];
-            //double sum = sumsOfWeights[wave_index];
-            //entropies[wave_index] = Math.Log(sum) - sumsOfWeightLogWeights[wave_index] / sum;
-            //
-            //for (int t = 0; t < T; ++t)
-            //{
-            //    wave[wave_index][t] = t == value;
-            //}
-            //
-            //
-            //int[] comp1 = compatible[wave_index][value];
-            //for (int d = 0; d < 4; d++) comp1[d] = 0;
-            //
-            //for (int d = 0; d < 4; d++)
-            //{
-            //    int dx = DX[d], dy = DY[d];
-            //    int x2 = key.x + dx, y2 = key.y + dy;
-            //    if (OnBoundary(x2, y2)) continue;
-            //
-            //    if (x2 < 0) x2 += FMX;
-            //    else if (x2 >= FMX) x2 -= FMX;
-            //    if (y2 < 0) y2 += FMY;
-            //    else if (y2 >= FMY) y2 -= FMY;
-            //
-            //    int i2 = x2 + y2 * FMX;
-            //    int[] p = propagator[d][value];
-            //    int[][] compat = compatible[i2];
-            //     
-            //    for (int l = 0; l < p.Length; l++)
-            //    {
-            //        int t2 = p[l];
-            //        int[] comp = compat[t2];
-            //
-            //        comp[d]--;
-            //        if (comp[d] == 0) Ban(i2, t2);
-            //    }
-            //}
-
 
         }
     }
@@ -467,47 +366,28 @@ class SimpleTiledModel : Model
     Dictionary<string, int> firstOccurrence = new Dictionary<string, int>();
     int tilesize = 16;
     bool unique = false;
-    //bool black;
 
-    public SimpleTiledModel(string name, /*string subsetName,*/ int width, int height, bool periodic) : base(width, height) //, bool black)
+    public SimpleTiledModel(string name, int width, int height, bool periodic) : base(width, height)
     {
-        
+
         this.periodic = periodic;
-        //this.black = black;
 
         XElement xroot = XDocument.Load($"Assets/Tilemap/{name}.xml").Root;
 
         tilesize = xroot.Get("size", tilesize);
         unique = xroot.Get("unique", unique);
-        //List<string> subset = null;
-        //if (subsetName != null)
-        //{
-        //    XElement xsubset = xroot.Element("subsets").Elements("subset").FirstOrDefault(x => x.Get<string>("name") == subsetName);
-        //    if (xsubset == null) Console.WriteLine($"ERROR: subset {subsetName} is not found");
-        //    else subset = xsubset.Elements("tile").Select(x => x.Get<string>("name")).ToList();
-        //}
-
-        //System.Drawing.Color[] tile(Func<int, int, System.Drawing.Color> f)
-        //{
-        //    System.Drawing.Color[] result = new System.Drawing.Color[tilesize * tilesize];
-        //    for (int y = 0; y < tilesize; y++) for (int x = 0; x < tilesize; x++) result[x + y * tilesize] = f(x, y);
-        //    return result;
-        //};
-        //
-        //System.Drawing.Color[] rotate(System.Drawing.Color[] array) => tile((x, y) => array[tilesize - 1 - y + x * tilesize]);
-        //System.Drawing.Color[] reflect(System.Drawing.Color[] array) => tile((x, y) => array[tilesize - 1 - x + y * tilesize]);
-
+        
         tiles = new List<WFCTile>();
         tilenames = new List<string>();
         var tempStationary = new List<double>();
 
         List<int[]> action = new List<int[]>();
-        
+
 
         foreach (XElement xtile in xroot.Element("tiles").Elements("tile"))
         {
             string tilename = xtile.Get<string>("name");
-            //if (subset != null && !subset.Contains(tilename)) continue;
+            bool tileCollision = xtile.Get<bool>("collide");
 
             Func<int, int> a, b;
             int cardinality;
@@ -572,28 +452,22 @@ class SimpleTiledModel : Model
                 for (int t = 0; t < cardinality; t++)
                 {
 
-                    //Tile t;
-                    //t.sprite.texture.GetPixel
-                    //Bitmap bitmap = new Bitmap($"samples/{name}/{tilename} {t}.png");
-                    //tiles.Add(tile((x, y) => bitmap.GetPixel(x, y)));
-                    //tiles.Add(tile((x, y) => new System.Drawing.Color()));
-                    UnityEngine.Debug.Log($"adding {tilename} {t} , {tiles.Count} (actions {action.Count})");
+                    // UnityEngine.Debug.Log($"adding {tilename} {t} , {tiles.Count} (actions {action.Count})");
                     tileIndices.Add($"{tilename} {t}", tiles.Count);
                     tiles.Add(new WFCTile($"{tilename} {t}"));
+                    tiles.Last().collides = tileCollision;
                     tilenames.Add($"{tilename} {t}");
                 }
             } else
             {
-                //Bitmap bitmap = new Bitmap($"samples/{name}/{tilename}.png");
-                //tiles.Add(tile((x, y) => bitmap.GetPixel(x, y)));
-                //tiles.Add(tile((x, y) => new System.Drawing.Color()));
                 tiles.Add(new WFCTile($"{tilename} 0"));
+                tiles.Last().collides = tileCollision;
                 tilenames.Add($"{tilename} 0");
 
                 for (int t = 1; t < cardinality; t++)
                 {
                     if (t <= 3) tiles.Add(new WFCTile(tiles[T + t - 1], 90, 0));
-                    if (t >= 4) tiles.Add(new WFCTile(tiles[T + t - 4], 0 , 180));
+                    if (t >= 4) tiles.Add(new WFCTile(tiles[T + t - 4], 0, 180));
                     tilenames.Add($"{tilename} {t}");
                 }
             }
@@ -617,8 +491,6 @@ class SimpleTiledModel : Model
         {
             string[] left = xneighbor.Get<string>("left").Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             string[] right = xneighbor.Get<string>("right").Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            //if (subset != null && (!subset.Contains(left[0]) || !subset.Contains(right[0]))) continue;
 
             int L = action[firstOccurrence[left[0]]][left.Length == 1 ? 0 : int.Parse(left[1])], D = action[L][1];
             int R = action[firstOccurrence[right[0]]][right.Length == 1 ? 0 : int.Parse(right[1])], U = action[R][1];
@@ -663,67 +535,37 @@ class SimpleTiledModel : Model
 
     protected override bool OnBoundary(int x, int y) => !periodic && (x < 0 || y < 0 || x >= FMX || y >= FMY);
 
-    public void /*override Bitmap */Graphics(Tilemap pathing, Tilemap collision)
+    public void Graphics(Tilemap pathing, Tilemap collision)
     {
-        //Bitmap result = new Bitmap(FMX * tilesize, FMY * tilesize);
-        //int[] bitmapData = new int[result.Height * result.Width];
-
         if (observed != null)
         {
             for (int x = 0; x < FMX; x++) for (int y = 0; y < FMY; y++)
                 {
                     WFCTile tile = tiles[observed[x + y * FMX]];
-                    //for (int yt = 0; yt < tilesize; yt++) for (int xt = 0; xt < tilesize; xt++)
-                    //    {
-                    pathing.SetTile(new Vector3Int(x, -y, 0), tile.tile);
+                    if (tile.collides)
+                    {
+                        collision.SetTile(new Vector3Int(x - FMX / 2, -y - 1 + FMY / 2, 0), tile.tile);
+                    } else
+                    {
+                        pathing.SetTile(new Vector3Int(x - FMX / 2, -y - 1 + FMY / 2, 0), tile.tile);
+                    }
+                    
 
-                    UnityEngine.Debug.Log($"set tile for {tile.name}");
+                    // UnityEngine.Debug.Log($"set tile for {tile.name}");
                     if (tile.rotation != 0 || tile.reflection != 0)
                     {
                         Matrix4x4 matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, tile.rotation), Vector3.one);
-                        pathing.SetTransformMatrix(new Vector3Int(x, -y, 0), matrix);
+                        if (tile.collides)
+                        {
+                            collision.SetTransformMatrix(new Vector3Int(x, -y, 0), matrix);
+                        } else
+                        {
+                            pathing.SetTransformMatrix(new Vector3Int(x, -y, 0), matrix);
+                        }
                         Debug.Log($"{tile.name} has rotation {tile.rotation} and reflect {tile.reflection}");
                     }
-                    //System.Drawing.Color c = tile[xt + yt * tilesize];
-                    //bitmapData[x * tilesize + xt + (y * tilesize + yt) * FMX * tilesize] =
-                    //    unchecked((int)0xff000000 | (c.R << 16) | (c.G << 8) | c.B);
-                    //    }
                 }
-        } 
-        //else
-        //{
-        //    for (int x = 0; x < FMX; x++) for (int y = 0; y < FMY; y++)
-        //        {
-        //            bool[] a = wave[x + y * FMX];
-        //            int amount = (from b in a where b select 1).Sum();
-        //            double lambda = 1.0 / (from t in Enumerable.Range(0, T) where a[t] select weights[t]).Sum();
-        //
-        //            for (int yt = 0; yt < tilesize; yt++) for (int xt = 0; xt < tilesize; xt++)
-        //                {
-        //                    //if (black && amount == T) ; // bitmapData[x * tilesize + xt + (y * tilesize + yt) * FMX * tilesize] = unchecked((int)0xff000000);
-        //                    //else
-        //                    //{
-        //                    double r = 0, g = 0, b = 0;
-        //                    for (int t = 0; t < T; t++) if (a[t])
-        //                        {
-        //                            //System.Drawing.Color c = tiles[t][xt + yt * tilesize];
-        //                            //r += (double)c.R * weights[t] * lambda;
-        //                            //g += (double)c.G * weights[t] * lambda;
-        //                            //b += (double)c.B * weights[t] * lambda;
-        //                        }
-        //
-        //                    //bitmapData[x * tilesize + xt + (y * tilesize + yt) * FMX * tilesize] =
-        //                    //    unchecked((int)0xff000000 | ((int)r << 16) | ((int)g << 8) | (int)b);
-        //                    //}
-        //                }
-        //        }
-        //}
-
-        //var bits = result.LockBits(new Rectangle(0, 0, result.Width, result.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-        //System.Runtime.InteropServices.Marshal.Copy(bitmapData, 0, bits.Scan0, bitmapData.Length);
-        //result.UnlockBits(bits);
-
-        //return result;
+        }
     }
 
     public string TextOutput()

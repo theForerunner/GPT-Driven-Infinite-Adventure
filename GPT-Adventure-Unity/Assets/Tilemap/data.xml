@@ -1,18 +1,18 @@
 <set size="48" unique="True">
 	<tiles>
-		<tile name="cliff" symmetry="T"/>
-		<tile name="cliffcorner" symmetry="L"/>
-		<tile name="cliffturn" symmetry="L"/>
+		<tile name="cliff" symmetry="T" collide="true"/>
+		<tile name="cliffcorner" symmetry="L" collide="true"/>
+		<tile name="cliffturn" symmetry="L" collide="true"/>
 		<tile name="grass" symmetry="X"/>
 		<tile name="grasscorner" symmetry="L" weight="0.0001"/>
 		<tile name="road" symmetry="T" weight="0.1"/>
 		<tile name="roadturn" symmetry="L" weight="0.1"/>
-		<tile name="water_a" symmetry="X"/>
-		<tile name="water_b" symmetry="X"/>
-		<tile name="water_c" symmetry="X"/>
-		<tile name="watercorner" symmetry="L"/>
-		<tile name="waterside" symmetry="T"/>
-		<tile name="waterturn" symmetry="L"/>
+		<tile name="water_a" symmetry="X" collide="true"/>
+		<tile name="water_b" symmetry="X" collide="true"/>
+		<tile name="water_c" symmetry="X" collide="true"/>
+		<tile name="watercorner" symmetry="L" collide="true"/>
+		<tile name="waterside" symmetry="T" collide="true"/>
+		<tile name="waterturn" symmetry="L" collide="true"/>
 	</tiles>
 	<neighbors>
 		<neighbor left="cliff 0" right="cliff 0"/>
