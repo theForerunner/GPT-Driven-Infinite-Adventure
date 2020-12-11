@@ -58,7 +58,13 @@ public class GenTiles : MonoBehaviour
         authoredWeights.Add("watercorner 3", 0.01f);
 
         SimpleTiledModel model = new SimpleTiledModel("data", 20, 12, false);
-        bool finished = model.Run(1235, 300, authoredTiles, authoredWeights);
+        bool finished = false;
+        int seed = 1234;
+        while (!finished)
+        {
+            finished = model.Run(seed++, 300, authoredTiles, authoredWeights);
+        }
+        //bool finished = model.Run(1235, 300, authoredTiles, authoredWeights);
 
         model.Graphics(pathingMap, collisionMap);
 
@@ -597,17 +603,20 @@ class SimpleTiledModel : Model
             }
         }
 
-        foreach (string key in authoredWeights.Keys)
+        if (authoredWeights != null)
         {
-            origWeights.Add(key, weights[tileIndices[key]]);
-            weights[tileIndices[key]] = authoredWeights[key];
+            foreach (string key in authoredWeights.Keys)
+            {
+                origWeights.Add(key, weights[tileIndices[key]]);
+                weights[tileIndices[key]] = authoredWeights[key];
+            }
         }
 
         bool rc = Run(seed, limit, authoredPresetBase);
 
-        foreach (string key in authoredWeights.Keys)
+        foreach (string key in origWeights.Keys)
         {
-            weights[tileIndices[key]] = authoredWeights[key];
+            weights[tileIndices[key]] = origWeights[key];
         }
 
         return rc;

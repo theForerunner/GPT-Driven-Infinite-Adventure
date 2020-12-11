@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: waterturn 1
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 1af4da508ba2cb149ab0b88627aef71b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0033edf8d16d2a74297e212e367e5498, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

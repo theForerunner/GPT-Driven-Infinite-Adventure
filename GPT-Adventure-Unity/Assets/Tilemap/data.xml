@@ -7,9 +7,9 @@
 		<tile name="grasscorner" symmetry="L" weight="0.0001"/>
 		<tile name="road" symmetry="T" weight="0.1"/>
 		<tile name="roadturn" symmetry="L" weight="0.1"/>
-		<tile name="water_a" symmetry="X" collide="true"/>
-		<tile name="water_b" symmetry="X" collide="true"/>
-		<tile name="water_c" symmetry="X" collide="true"/>
+		<tile name="water_a" symmetry="X"/>
+		<tile name="water_b" symmetry="X"/>
+		<tile name="water_c" symmetry="X"/>
 		<tile name="watercorner" symmetry="L" collide="true"/>
 		<tile name="waterside" symmetry="T" collide="true"/>
 		<tile name="waterturn" symmetry="L" collide="true"/>
@@ -55,14 +55,14 @@
 		<neighbor left="water_a 0" right="water_b 0"/>
 		<neighbor left="water_a 0" right="water_c 0"/>
 		<neighbor left="water_a 0" right="waterside 1"/>
-		<neighbor left="water_a 0" right="waterturn 1"/>
+		<neighbor left="water_a 0" right="waterturn 3"/>
 		<neighbor left="water_b 0" right="waterside 1"/>
-		<neighbor left="water_b 0" right="waterturn 1"/>
+		<neighbor left="water_b 0" right="waterturn 3"/>
 		<neighbor left="water_c 0" right="waterside 1"/>
-		<neighbor left="water_c 0" right="waterturn 1"/>
+		<neighbor left="water_c 0" right="waterturn 3"/>
 		<neighbor left="watercorner 0" right="waterside 0"/>
-		<neighbor left="watercorner 0" right="waterturn 0"/>
+		<neighbor left="watercorner 0" right="waterturn 2"/>
 		<neighbor left="waterside 0" right="waterside 0"/>
-		<neighbor left="waterside 0" right="waterturn 0"/>
+		<neighbor left="waterside 0" right="waterturn 2"/>
 	</neighbors>
 </set>
