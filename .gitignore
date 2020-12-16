@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# GPT-2 Model
+generator/models/
+
 # Distribution / packaging
 .Python
 build/
