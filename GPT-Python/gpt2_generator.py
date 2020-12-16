@@ -92,8 +92,13 @@ def main():
     
     while True:
         message = socket.recv()
+        message_data = json.load(message)
+        
         print("Received request: %s" % message)
-        socket.send(generator.generate_raw(message).encode('utf-8'))
+        
+        model_text = generator.generate_raw(message_data["prompt"]);
+        
+        socket.send(model_text.encode('utf-8'))
     
 
 class GPT2Generator:
@@ -105,7 +110,7 @@ class GPT2Generator:
         self.censor = censor
 
         self.model_name = "model_v5"
-        self.model_dir = "generator/gpt2/models"
+        self.model_dir = "."
         self.checkpoint_path = os.path.join(self.model_dir, self.model_name)
 
         models_dir = os.path.expanduser(os.path.expandvars(self.model_dir))
