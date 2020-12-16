@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 # GPT-2 Model
-GPT-2/generator/models/
+GPT/generator/models/
 
 # Distribution / packaging
 .Python
