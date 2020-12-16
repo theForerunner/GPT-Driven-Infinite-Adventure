@@ -59,8 +59,9 @@ public class GenTiles : MonoBehaviour
 
         SimpleTiledModel model = new SimpleTiledModel("data", 20, 12, false);
         bool finished = false;
+        int retries = 10;
         int seed = 1234;
-        while (!finished)
+        while (!finished && --retries > 0)
         {
             finished = model.Run(seed++, 300, authoredTiles, authoredWeights);
         }
@@ -513,7 +514,7 @@ class SimpleTiledModel : Model
         }
 
         for (int t2 = 0; t2 < T; t2++) for (int t1 = 0; t1 < T; t1++)
-            {
+            { 
                 tempPropagator[2][t2][t1] = tempPropagator[0][t1][t2];
                 tempPropagator[3][t2][t1] = tempPropagator[1][t1][t2];
             }

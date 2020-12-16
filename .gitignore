@@ -196,3 +196,5 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /GPT-Adventure-Unity/[Aa]ssets/[Ss]treamingAssets/aa.meta
 /GPT-Adventure-Unity/[Aa]ssets/[Ss]treamingAssets/aa/*
+GPT-Python/model_v5/model-550.data-00000-of-00001
+GPT-Python/model_v5/
