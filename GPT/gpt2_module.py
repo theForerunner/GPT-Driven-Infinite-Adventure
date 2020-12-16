@@ -52,7 +52,7 @@ class GameManager:
 
 
 if __name__ == '__main__':
-    gm = GameManager()
+    gm = GameManager('complex')
     opening = gm.start()
     print(opening)
     attack = "You kill dragon"
