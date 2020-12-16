@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
         // Tile curr_tile = (Tile)pathingMap.GetTile(Vector3Int.FloorToInt(movePoint.position));
 
-        Debug.Log(curr_tile);
+        // Debug.Log(curr_tile);
 
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
         {
