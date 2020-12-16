@@ -17,30 +17,30 @@ using System.Linq;
 using System.Drawing;
 using System.ComponentModel;
 using System.Xml.Linq;
-
-
+using Unity.Mathematics;
 
 public class GenTiles : MonoBehaviour
 {
+    Tilemap pathingMap;
+    Tilemap collisionMap;
 
-    // public WFCPalette tilePallete;
-    public Tilemap pathingMap;
-    public Tilemap collisionMap;
-    public Tile test_tile = null;
-
-    // Start is called before the first frame update
-    void Start()
+    public GenTiles(Tilemap pathing, Tilemap collision)
     {
+        pathingMap = pathing;
+        collisionMap = collision;
+    }
 
+    public bool Generate(
+        Dictionary<Vector2Int, string> authoredTiles,
+        Dictionary<string, double> authoredWeights)
+    {
         if (pathingMap == null || collisionMap == null)
         {
-            return;
+            return false;
         }
-        Dictionary<Vector2Int, string> authoredTiles = new Dictionary<Vector2Int, string>();
-        Dictionary<string, double> authoredWeights = new Dictionary<string, double>();
-
+        int seed = UnityEngine.Random.Range(0, 1000000000);
         authoredTiles.Add(new Vector2Int(0, 5), "road 0");
-
+        
         authoredWeights.Add("water_a 0", 0.01f);
         authoredWeights.Add("water_b 0", 0.01f);
         authoredWeights.Add("water_c 0", 0.01f);
@@ -59,14 +59,27 @@ public class GenTiles : MonoBehaviour
 
         SimpleTiledModel model = new SimpleTiledModel("data", 20, 12, false);
         bool finished = false;
-        int seed = 1234;
-        while (!finished)
+
+        int retries = 10;
+
+        while (!finished && --retries > 0)
         {
             finished = model.Run(seed++, 300, authoredTiles, authoredWeights);
         }
-        //bool finished = model.Run(1235, 300, authoredTiles, authoredWeights);
 
-        model.Graphics(pathingMap, collisionMap);
+        if (finished)
+        {
+            model.Graphics(pathingMap, collisionMap);
+            return true;
+        }
+
+        return false;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
 
     }
 
@@ -382,7 +395,7 @@ class SimpleTiledModel : Model
 
         tilesize = xroot.Get("size", tilesize);
         unique = xroot.Get("unique", unique);
-        
+
         tiles = new List<WFCTile>();
         tilenames = new List<string>();
         var tempStationary = new List<double>();
@@ -555,7 +568,7 @@ class SimpleTiledModel : Model
                     {
                         pathing.SetTile(new Vector3Int(x - FMX / 2, -y - 1 + FMY / 2, 0), tile.tile);
                     }
-                    
+
 
                     // UnityEngine.Debug.Log($"set tile for {tile.name}");
                     if (tile.rotation != 0 || tile.reflection != 0)
