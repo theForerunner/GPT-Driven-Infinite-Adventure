@@ -23,7 +23,12 @@ public class PlayerController : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
         Vector3 moveCandidate;
 
-        // Tile curr_tile = (Tile)pathingMap.GetTile(Vector3Int.FloorToInt(movePoint.position));
+        Tile curr_tile = (Tile)pathingMap.GetTile(Vector3Int.FloorToInt(movePoint.position));
+
+        if (curr_tile == null)
+        {
+            curr_tile = (Tile)collisionMap.GetTile(Vector3Int.FloorToInt(movePoint.position));
+        }
 
         // Debug.Log(curr_tile);
 

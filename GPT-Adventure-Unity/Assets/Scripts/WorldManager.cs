@@ -12,16 +12,21 @@ public class WorldManager : MonoBehaviour
 
     GenTiles tileGenerator;
 
-    // Start is called before the first frame update
-    void Start()
+    void onSceneGPT(GPTNetResponse res)
     {
-        tileGenerator = new GenTiles(pathingMap, collisionMap);
 
         Dictionary<Vector2Int, string> authoredTiles = new Dictionary<Vector2Int, string>();
         Dictionary<string, double> authoredWeights = new Dictionary<string, double>();
 
 
         tileGenerator.Generate(authoredTiles, authoredWeights);
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        gpt.Generate(onSceneGPT, "start", "You wake up in an open area and look around.", "");
+        tileGenerator = new GenTiles(pathingMap, collisionMap, Random.Range(0, 10000000));
     }
 
     // Update is called once per frame

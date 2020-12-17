@@ -19,15 +19,17 @@ using System.ComponentModel;
 using System.Xml.Linq;
 using Unity.Mathematics;
 
-public class GenTiles : MonoBehaviour
+public class GenTiles
 {
     Tilemap pathingMap;
     Tilemap collisionMap;
+    int randomSeed;
 
-    public GenTiles(Tilemap pathing, Tilemap collision)
+    public GenTiles(Tilemap pathing, Tilemap collision, int seed)
     {
         pathingMap = pathing;
         collisionMap = collision;
+        randomSeed = seed;
     }
 
     public bool Generate(
@@ -38,7 +40,7 @@ public class GenTiles : MonoBehaviour
         {
             return false;
         }
-        int seed = UnityEngine.Random.Range(0, 1000000000);
+
         authoredTiles.Add(new Vector2Int(0, 5), "road 0");
         
         authoredWeights.Add("water_a 0", 0.01f);
@@ -64,7 +66,7 @@ public class GenTiles : MonoBehaviour
 
         while (!finished && --retries > 0)
         {
-            finished = model.Run(seed++, 300, authoredTiles, authoredWeights);
+            finished = model.Run(randomSeed, 300, authoredTiles, authoredWeights);
         }
 
         if (finished)
