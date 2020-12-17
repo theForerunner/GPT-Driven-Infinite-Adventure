@@ -15,6 +15,9 @@ class StoryManager:
         # result = cut_trailing_sentence(result)
         self.story_start = context + story_prompt
         self.context = context
+        self.actions = []
+        self.results = []
+        self.choices = []
         return self.get_story()
 
     def story_context(self):

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -9,7 +10,17 @@ public class GPTManager : MonoBehaviour
     private action onResponse;
     public GameObject GPTObject;
 
-    IEnumerator PostRequest(string url, string json, action callback)
+    List<GPTNetRequest> requestQueue;
+
+    void generateNext()
+    {
+        if (requestQueue.Count > 0)
+        {
+            StartCoroutine(PostRequest("http://127.0.0.1:8800", JsonUtility.ToJson(requestQueue[0]), onResponse));
+        }
+    }
+
+    IEnumerator PostRequest(string url, string json, action responseCallback)
     {
         Debug.Log("url: " + url);
         var uwr = new UnityWebRequest(url, "POST");
@@ -32,28 +43,32 @@ public class GPTManager : MonoBehaviour
 
             JsonUtility.FromJsonOverwrite(uwr.downloadHandler.text, resData);
 
-            callback(resData);
+            if (responseCallback != null)
+            {
+                responseCallback(resData);
+            }
         }
+
+        requestQueue.RemoveAt(0);
+        generateNext();
     }
 
-    public void Generate(action callback, string act, string prompt, string context)
+    public void Generate(action callback, GPTNetRequest reqData)
     {
         onResponse = callback;
 
-        GPTNetRequest reqData = new GPTNetRequest();
-
-        reqData.action = act;
-        reqData.prompt = prompt;
-        reqData.context = context;
-
+        requestQueue.Add(reqData);
         Debug.Log("Sending data");
-        StartCoroutine(PostRequest("http://127.0.0.1:8800", JsonUtility.ToJson(reqData), onResponse));
+        if (requestQueue.Count == 1)
+        {
+            StartCoroutine(PostRequest("http://127.0.0.1:8800", JsonUtility.ToJson(reqData), onResponse));
+        }
 
     }
 
     void Start()
     {
-        
+        requestQueue = new List<GPTNetRequest>();
     }
 
     // Update is called once per frame
@@ -71,6 +86,9 @@ public class GPTNetRequest
     public string action;
     public string prompt;
     public string context;
+
+    public GPTNetRequest(string action) { this.action = action; }
+    public GPTNetRequest() { }
 }
 
 [System.Serializable]

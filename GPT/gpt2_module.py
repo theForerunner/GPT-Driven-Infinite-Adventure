@@ -6,9 +6,79 @@ from GPT.utils.utils import get_similarity, first_to_second_person
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import json
 
+import regex as re
+import textblob as tb
+from textblob import wordnet
 
+def detect_agents(text_response):
+    
+    agents = {
+        'count': 0,
+        'human': 0,
+        'agentName': "other",
+    }
+    
+    resTB = tb.TextBlob(text_response)
+    
+    for word, part in resTB.tags:
+        if not "NN" in part:
+            continue
+        descs = tb.Word(word).get_synsets(pos = wordnet.NOUN)
+        
+        if len(descs) == 0:
+            continue
+            
+        desc = descs[0].definition()
+        
+        print("%s: %s" % (word, desc))
+        
+        for pattern_list, is_human in [
+            (["creature", "imaginary", "beast", "mammal", "living"], 0),
+            (["person", "people", "band", "citizen", "man"], 1),
+        ]:
+            for pattern in pattern_list:
+                if pattern in desc.split() or word == pattern:
+                    if part == "NNS":
+                        agents['count'] = 3
+                    else:
+                        agents['count'] = 1
+                    agents['human'] = is_human
+                    print("\tIs a %s!" % pattern)
+                    
+    return agents
+    
 
-class S(BaseHTTPRequestHandler):
+def action_raw(request, response):
+    response['textResponse'] = gm.generator.generate_raw(request['prompt'])
+    
+def action_observe_scene(request, response):
+    location = "scenery"
+    default_observation = "I look around at the %s." % location
+    prompt = request['prompt'] if request['prompt'] else default_observation
+    response['textResponse'] = gm.act(prompt)
+    
+    agents = detect_agents(response['textResponse'])
+    response['key1'] = 'agentCount'
+    response['val1'] = agents['count']
+    response['key2'] = 'isHuman'
+    response['val2'] = agents['human']
+    
+    
+def action_switch_scenes(request, response):
+    response['textResponse'] = gm.talk(request['prompt'])
+    
+def action_act(request, response):
+    response['textResponse'] = gm.act(request['prompt'])
+    
+def action_talk(request, response):
+    response['textResponse'] = gm.talk(request['prompt'])
+    
+def action_start(request, response):
+    gm.set_context(request['context'])
+    gm.set_prompt(request['prompt'])
+    response['textResponse'] = gm.start()
+    
+class RequestHandler(BaseHTTPRequestHandler):
     def _set_headers(self, respCode = 200):
         self.send_response(respCode)
         self.send_header("Content-type", "application/json")
@@ -45,48 +115,54 @@ class S(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(response).encode('utf-8'))
             return
         
-        if not message['action'] in ["start", "talk", "act", "raw"]:
-            response['error'] = "invalid or missing action"
+        
+        action_map = {
+            'start': {
+                'requires': ['prompt', 'context'],
+                'handler': action_start,
+            },
+            'observe_scene': {
+                'handler': action_observe_scene,
+            },
+            'switch_scenes': {
+                'handler': action_switch_scenes,
+            },
+            'act': {
+                'requires': ['prompt'],
+                'handler': action_act,
+            },
+            'talk': {
+                'requires': ['prompt'],
+                'handler': action_talk,
+            },
+            'raw': {
+                'requires': ['prompt'],
+                'handler': action_raw,
+            },
+        }
+        
+        
+        if not message['action'] or not message['action'] in action_map:
+            response['error'] = "missing or invalid action"
             self._set_headers(500)
             self.wfile.write(json.dumps(response).encode('utf-8'))
             return
         
-        # TODO: process results numerically
-        if message['action'] == 'start':
-            if 'context' in message and type(message['context']) == str:
-                gm.set_context(message['context'])
-            if 'prompt' in message and type(message['prompt']) == str:
-                gm.set_prompt(message['prompt'])
-                
-            response['textResponse'] = gm.start()
-        elif message['action'] == 'talk':
-            if not 'prompt' in message or not type(message['prompt']) == str:
-                response['error'] = "talk requires prompt"
-                self._set_headers(500)
-                self.wfile.write(json.dumps(response).encode('utf-8'))
-                return
-            response['textResponse'] = gm.talk(message['prompt'])
-        elif message['action'] == 'act':
-            if not 'prompt' in message or not type(message['prompt']) == str:
-                response['error'] = "act requires prompt"
-                self._set_headers(500)
-                self.wfile.write(json.dumps(response).encode('utf-8'))
-                return
-            response['textResponse'] = gm.act(message['prompt'])
-        elif message['action'] == 'raw':
-            if not 'prompt' in message or not type(message['prompt']) == str:
-                response['error'] = "raw requires prompt"
-                self._set_headers(500)
-                self.wfile.write(json.dumps(response).encode('utf-8'))
-                return
-            response['textResponse'] = gm.generator.generate_raw(message_data["prompt"])
+        if 'requires' in action_map[message['action']]:
+            for requirement in action_map[message['action']]['requires']:
+                if not requirement in message or not type(message[requirement]) == str:
+                    response['error'] = "%s requires %s" % (message['action'], requirement)
+                    self._set_headers(500)
+                    self.wfile.write(json.dumps(response).encode('utf-8'))
+        
+        action_map[message['action']]['handler'](message, response)
         
         self._set_headers()
         self.wfile.write(json.dumps(response).encode('utf-8'))
         
 
 
-def run(server_class=HTTPServer, handler_class=S, addr="localhost", port=8000):
+def run(server_class = HTTPServer, handler_class = RequestHandler, addr = "localhost", port = 8000):
     server_address = (addr, port)
     httpd = server_class(server_address, handler_class)
 

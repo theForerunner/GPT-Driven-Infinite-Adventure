@@ -41,28 +41,11 @@ public class GenTiles
             return false;
         }
 
-        authoredTiles.Add(new Vector2Int(0, 5), "road 0");
-        
-        authoredWeights.Add("water_a 0", 0.01f);
-        authoredWeights.Add("water_b 0", 0.01f);
-        authoredWeights.Add("water_c 0", 0.01f);
-        authoredWeights.Add("waterside 0", 0.01f);
-        authoredWeights.Add("waterside 1", 0.01f);
-        authoredWeights.Add("waterside 2", 0.01f);
-        authoredWeights.Add("waterside 3", 0.01f);
-        authoredWeights.Add("waterturn 0", 0.01f);
-        authoredWeights.Add("waterturn 1", 0.01f);
-        authoredWeights.Add("waterturn 2", 0.01f);
-        authoredWeights.Add("waterturn 3", 0.01f);
-        authoredWeights.Add("watercorner 0", 0.01f);
-        authoredWeights.Add("watercorner 1", 0.01f);
-        authoredWeights.Add("watercorner 2", 0.01f);
-        authoredWeights.Add("watercorner 3", 0.01f);
 
         SimpleTiledModel model = new SimpleTiledModel("data", 20, 12, false);
         bool finished = false;
 
-        int retries = 10;
+        int retries = 30;
 
         while (!finished && --retries > 0)
         {
@@ -73,6 +56,9 @@ public class GenTiles
         {
             model.Graphics(pathingMap, collisionMap);
             return true;
+        } else {
+            Debug.Log("Error! WFC failed to generate a map");
+            model.Graphics(pathingMap, collisionMap);
         }
 
         return false;
