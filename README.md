@@ -39,5 +39,6 @@ Deliverable Reports:						              Garrett & Xianda<br>
   * gpt-2-simple
   * stanza
  * GPT-2 model: 
-   download the model and put it under <path-to-project>/GPT-Driven-Infinite-Adventure/GPT/generator/models folder
+   * download the model [torrent](docs/gpt2_model.torrent)
+   * put it under <path-to-project>/GPT-Driven-Infinite-Adventure/GPT/generator/models folder
  
