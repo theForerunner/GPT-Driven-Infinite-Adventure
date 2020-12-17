@@ -8,6 +8,9 @@ public class WorldManager : MonoBehaviour
     public Tilemap pathingMap;
     public Tilemap collisionMap;
 
+    public GameObject creaturePrefab;
+    public GameObject NPCPrefab;
+
     public GPTManager gpt;
 
     GenTiles tileGenerator;

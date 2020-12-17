@@ -11,21 +11,13 @@ public class PlayerController : MonoBehaviour
     public Tilemap pathingMap;
     public Tilemap collisionMap;
 
-    SpriteRenderer spriteRenderer;
-    public Sprite[] spriteArray;
-    public int animLength;
-    public float animSpeed;
-    int animIndex;
-    int animDirection;
-    float animOffset;
-    bool animRunning;
-    bool animAttacking;
+    CharAnimation charAnimation;
 
     // Start is called before the first frame update
     void Start()
     {
+        charAnimation = gameObject.GetComponent<CharAnimation>();
         movePoint.parent = null;
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -47,9 +39,9 @@ public class PlayerController : MonoBehaviour
         {
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
             {
-                animRunning = true;
-                if (Input.GetAxisRaw("Horizontal") > 0) animDirection = 0;
-                else animDirection = 3;
+                charAnimation.animRunning = true;
+                if (Input.GetAxisRaw("Horizontal") > 0) charAnimation.animDirection = 0;
+                else charAnimation.animDirection = 3;
                 moveCandidate = movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
                 if (!Physics2D.Linecast(transform.position, moveCandidate))
                 {
@@ -59,9 +51,9 @@ public class PlayerController : MonoBehaviour
 
             if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
             {
-                animRunning = true;
-                if (Input.GetAxisRaw("Vertical") > 0) animDirection = 2;
-                else animDirection = 1;
+                charAnimation.animRunning = true;
+                if (Input.GetAxisRaw("Vertical") > 0) charAnimation.animDirection = 2;
+                else charAnimation.animDirection = 1;
                 moveCandidate = movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
                 if (!Physics2D.Linecast(transform.position, moveCandidate))
                 {
@@ -71,31 +63,9 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)
             {
-
-                animRunning = false;
+                charAnimation.animRunning = false;
             }
         }
 
-        int animGroupStart = 4; // idle
-        if (animAttacking)
-        {
-            animGroupStart = 0;
-        } else if (animRunning)
-        {
-            animGroupStart = 8;
-        }
-
-
-        spriteRenderer.sprite = spriteArray[
-            animGroupStart * animLength +
-            animDirection * animLength + 
-            (int)animOffset
-        ];
-        animOffset = animOffset + animSpeed * Time.deltaTime;
-        if (animOffset > animLength)
-        {
-            animOffset = animOffset % animLength;
-            animAttacking = false;
-        }
     }
 }
