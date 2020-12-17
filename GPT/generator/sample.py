@@ -1,5 +1,5 @@
 import tensorflow as tf
-from generator import model
+from GPT.generator import model
 
 
 def penalize_used(logits, output):
