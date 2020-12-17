@@ -1,0 +1,234 @@
+[
+    {
+        "text": "The black night holds me close until the dawn, always my cloak until I am ready for the dawn\n",
+        "label": "pos"
+    },
+    {
+        "text": "The flecks of golden sunshine mingled with the few wispy clouds in the sky.\n",
+        "label": "neg"
+    },
+    {
+        "text": "It is that friendly blackness that allows my eyes to rest and let my dreams take centre stage\n",
+        "label": "pos"
+    },
+    {
+        "text": "The road is midnight under the cloud, yet beyond is the dawn\n",
+        "label": "pos"
+    },
+    {
+        "text": "The sun set threatening to dip behind the horizon, firstly cascading a prim bombardment of colours that were flung over the sky with terrible alacrity.\n",
+        "label": "neg"
+    },
+    {
+        "text": "Night came as a reward of sorts, a restfulness above to calm the soul\n",
+        "label": "pos"
+    },
+    {
+        "text": "I found the darkness strange\n",
+        "label": "pos"
+    },
+    {
+        "text": "Sometimes eyes need music, and the darker the night the sweeter the song\n",
+        "label": "pos"
+    },
+    {
+        "text": "She let her rays cascade onto the world, bringing the scene into full view, adjusting the brightness and contrast.\n",
+        "label": "neg"
+    },
+    {
+        "text": "Upon this Lunar New Year, amid the wintry air, beneath the noble starry-black, we observe the beauty of the moon\n",
+        "label": "pos"
+    },
+    {
+        "text": "The sky was a billion pure eyes of light and the grass green underfoot, it was as if night and day had become one beautiful moment. Dawn had come.\n",
+        "label": "neg"
+    },
+    {
+        "text": "The fiery ball of light rising from the horizon, colored the sky in shades of orange and yellow.\n",
+        "label": "neg"
+    },
+    {
+        "text": "The morning sun lay in the sky like a perfect, unspoiled egg yolk.\n",
+        "label": "neg"
+    },
+    {
+        "text": "Passed leaf, upon moss softened rock, come the sun rays that were promised us by the starlit sky.\n",
+        "label": "neg"
+    },
+    {
+        "text": "The noon sunlight is like a camera - telling no lies.\n",
+        "label": "neg"
+    },
+    {
+        "text": "In the night I am as the flora of nature, alive and unseeing, existing only as myself\n",
+        "label": "pos"
+    },
+    {
+        "text": "With eyes closed I am at home and the blackness around is my cocoon, a place in which my dreams may flow freely\n",
+        "label": "pos"
+    },
+    {
+        "text": "By dawn's early light the riders came, the sun opening up as a flower on the horizon, rising to send those petals of gold to warm the forest - leaf, branch and root.\n",
+        "label": "neg"
+    },
+    {
+        "text": "The night rides in on a horse of pure midnight velvet, beckoned by the stars under a the glow of a full moon\n",
+        "label": "pos"
+    },
+    {
+        "text": "It is the pure black of the night that gives the stars their beauty, and in it my heart is safe, my soul serene\n",
+        "label": "pos"
+    },
+    {
+        "text": "The night was a special kind of blackness, the kind that wants only to hold the stars and help them to shine all the brighter\n",
+        "label": "pos"
+    },
+    {
+        "text": "The sun poured out it's brilliant hot oranges and reds into the horizon like a pot of molten lava.\n",
+        "label": "neg"
+    },
+    {
+        "text": "In that broad daylight was a sense of serenity, a peace that invited itself into the soul and made itself at home.\n",
+        "label": "neg"
+    },
+    {
+        "text": "The dawn came with a musical silence, the soul hearing the melody that the ears could not. A new day had come, new possibilities, a fresh page yet to be written.\n",
+        "label": "neg"
+    },
+    {
+        "text": "When the twilight fades to blackness it lights a fire inside my guts\n",
+        "label": "pos"
+    },
+    {
+        "text": "There are days the dawn proceeds as if it were not ready to come, yet schedule demands and entrance, and so the sun rises all the same.\n",
+        "label": "neg"
+    },
+    {
+        "text": "As the colours of the day rest, perhaps dream of the morrow, the hillside becomes its monochrome beauty, shapes that make an ever-changing, ever-present puzzle, question and answer united\n",
+        "label": "pos"
+    },
+    {
+        "text": "Today the light is oddly bright, casting the seagulls into dark shadows against a sky of palest blue.\n",
+        "label": "neg"
+    },
+    {
+        "text": "So, as the moon and stars shine above the passing clouds of ink, as the air releases the heat of the day, my brain conjures a new movie for my inner eye\n",
+        "label": "pos"
+    },
+    {
+        "text": "The sun, that daughter of the sky, once again took her rightful place on the horizon.\n",
+        "label": "neg"
+    },
+    {
+        "text": "It was a warm black that hugged you no matter what, and within it's safety I could feel my own soul all the more clearly, that innocent inborn spark\n",
+        "label": "pos"
+    },
+    {
+        "text": "The early morning sunlight, soft and diffuse, gives way to the first strong rays of the day, the ones that bring true warmth.\n",
+        "label": "neg"
+    },
+    {
+        "text": "Sunlight comes, an elixir after so many black hours.\n",
+        "label": "neg"
+    },
+    {
+        "text": "Castle walls rise out of the darkness, out of the silent charcoal curtain that is the dawn.\n",
+        "label": "neg"
+    },
+    {
+        "text": "Living in the heart of a city, I had grown used to having the warming, orange glow of streetlamps outside my window, their light filtering in through the gaps in the curtains\n",
+        "label": "pos"
+    },
+    {
+        "text": "Give me that dawn declared by the cockerel's calling, give me the moments that stretch out with each stirring of leaf and grassy wand. For then on that farm, cozy with dreams that fly through the rafters to the sky above, I can awake and keep my dreams with me until the stars return once more.\n",
+        "label": "neg"
+    },
+    {
+        "text": "The daylight comes as such intricately woven threads of gold so light that its creator can only be divine.\n",
+        "label": "neg"
+    },
+    {
+        "text": "The pure black of the night is my comfort, the blanket of generous velvet that keeps me safe\n",
+        "label": "pos"
+    },
+    {
+        "text": "Daylight comes as if the dreams of nighttime have chosen to shine brightly.\n",
+        "label": "neg"
+    },
+    {
+        "text": "Sun rays come as nature's easel, giving brilliant colour to what was hidden even under the passing starlit night.\n",
+        "label": "neg"
+    },
+    {
+        "text": "The night means downtown is lit by the neon lights of the clubs and bars, shinning on the rain-kissed sidewalks",
+        "label": "pos"
+    },
+    {
+        "text": "As the sun sets, its rising is already promised to the land, to the green shoots who wait in faith\n",
+        "label": "pos"
+    },
+    {
+        "text": "Igniting the world anew with such brilliance, the sun rose with casual elegance.\n",
+        "label": "neg"
+    },
+    {
+        "text": "On this night the natural black hugs the stars as a mother to her newborn\n",
+        "label": "pos"
+    },
+    {
+        "text": "In the serenade of the black, the stars are a choir; they are lights that sing in infinite patterns\n",
+        "label": "pos"
+    },
+    {
+        "text": "The sky was black tranquility married to a poetry of stars\n",
+        "label": "pos"
+    },
+    {
+        "text": "When the night comes, look heavenward and be willing to see that the stars still shine; for the dawn will come\n",
+        "label": "pos"
+    },
+    {
+        "text": "In the daylight my mood is as brilliant as those sunny rays and my soul takes on a lightness, a will to float and play upon the clouds.\n",
+        "label": "neg"
+    },
+    {
+        "text": "The sun was bright and early.\n",
+        "label": "neg"
+    },
+    {
+        "text": "There was a strangeness to the sunlight, as if a layer of tinted filtering had been added in the sky.\n",
+        "label": "neg"
+    },
+    {
+        "text": "When I tilted my head skyward I could see clearly millions of bright stars dotted on the black canvas of night, yet none of that light seemed to filter far enough down to make any difference when I turned my eyes away\n",
+        "label": "pos"
+    },
+    {
+        "text": "Sunlight comes as woven strands, free and united, flowing into a day it reveals and solidifies, making the world of our nightly dreams something so beautiful.\n",
+        "label": "neg"
+    },
+    {
+        "text": "When she opened her eyes all she saw was the cloudless blue sky and the golden sun radiating down on her tanned skin.",
+        "label": "neg"
+    },
+    {
+        "text": "This was a blackness that I couldn't recall seeing before - one that was almost absolute\n",
+        "label": "pos"
+    },
+    {
+        "text": "The sky glows like a summer peach and the sun is pure gold in the sky. The colours of the foliage return to green and the air warms to an ambient twenty or so.\n",
+        "label": "neg"
+    },
+    {
+        "text": "In this night we all become one, from rock to plant to animal, one promise of life awaiting the return of the sun\n",
+        "label": "pos"
+    },
+    {
+        "text": "It is the pure black that makes the moon so beautiful, that makes a stage for her to stand upon\n",
+        "label": "pos"
+    },
+    {
+        "text": "We are the fireworks in this velvet dark, the blaze that dares to light up the night\"\n",
+        "label": "pos"
+    }
+]

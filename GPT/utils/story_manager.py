@@ -1,5 +1,3 @@
-from GPT.utils.utils import cut_trailing_sentence
-
 class StoryManager:
     def __init__(self, generator):
         self.generator = generator

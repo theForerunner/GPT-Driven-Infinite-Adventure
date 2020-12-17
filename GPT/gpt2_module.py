@@ -177,13 +177,13 @@ def main():
     
     
 class GameManager:
-    def __init__(self, generator='simple'):
+    def __init__(self, generator='complex'):
         if generator == 'simple':
             self.generator =  GPT2GeneratorSimple()
         else:
             self.generator = GPT2Generator()
         self.story_manager = StoryManager(self.generator)
-        self.prompt = "You are on a quest to defeat the evil dragon of Larion. You've heard he lives up at the north of the kingdom. You set on the path to defeat him and walk into a dark forest. You get into the forest."
+        self.prompt = "You are on a quest to defeat the evil dragon of Larion. You've heard he lives up at the north of the kingdom. You set on the path to defeat him and walk into a dark forest."
         self.context = "You are a knight living in the kingdom of Larion."
 
     def generate_result(self, action):
