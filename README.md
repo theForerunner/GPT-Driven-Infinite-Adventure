@@ -15,12 +15,16 @@ To address this issue, we have made a game that use GPT-2 to generate the plot a
  * GPT-2 model: 
    * download the model [torrent](docs/gpt2_model.torrent)
    * put it under GPT-Driven-Infinite-Adventure/GPT/generator/models folder
- * Unity
+ * Unity Project:
+   * Install Unity Hub and add /GPT-Adventure-Unity directory as project
+   * Install and configure project with editor version 2020.2.0b1
 ## Execution
 ### GPT-2 Server
+ * Make sure no firewall rules or other restrictions limit communication on localhost port 8800
  * Enter GPT-Driven-Infinite-Adventure/GPT folder
  * excute the following line in command line
    ```
    python gpt2_module.py
    ```
+ * Open Unity project in editor and press play while python model is running.
  

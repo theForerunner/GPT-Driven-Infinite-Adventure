@@ -25,11 +25,18 @@ public class GenTiles
     Tilemap collisionMap;
     int randomSeed;
 
-    public GenTiles(Tilemap pathing, Tilemap collision, int seed)
+    int width;
+    int height;
+
+    public GenTiles(Tilemap pathing, Tilemap collision, int seed, int width, int height)
     {
         pathingMap = pathing;
         collisionMap = collision;
         randomSeed = seed;
+
+        this.width = width;
+        this.height = height;
+
     }
 
     public bool Generate(
@@ -42,7 +49,7 @@ public class GenTiles
         }
 
 
-        SimpleTiledModel model = new SimpleTiledModel("data", 20, 12, false);
+        SimpleTiledModel model = new SimpleTiledModel("data", width, height, false);
         bool finished = false;
 
         int retries = 30;
@@ -64,18 +71,40 @@ public class GenTiles
         return false;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void Decorate(Dictionary<string, float> resParsed, WorldManager world)
     {
+        GameObject prefab;
 
+        if (resParsed.ContainsKey("actorCount") && resParsed["actorCount"] > 0)
+        {
+            if (resParsed.ContainsKey("isHuman") && resParsed["isHuman"] != 0) {
+                prefab = world.NPCPrefab;
+            } else
+            {
+                prefab = world.creaturePrefab;
+            }
+
+            for (int actorIndex = 0; actorIndex < (int)resParsed["actorCount"]; ++actorIndex)
+            {
+                Vector2Int spawnCandidate = new Vector2Int(
+                    UnityEngine.Random.Range(0,width), UnityEngine.Random.Range(0, height));
+
+                for (int i = 0; i < width * height; spawnCandidate += new Vector2Int(i % 2 == 0 ? 1 : 0, i++ % 2 == 1 ? 1 : 0 )) { // oh no
+                    spawnCandidate.x = spawnCandidate.x % width;
+                    spawnCandidate.y = spawnCandidate.y % height;
+
+                    if ((Tile)collisionMap.GetTile((Vector3Int)spawnCandidate) == null)
+                    {
+                        
+                        GameObject.Instantiate(prefab, world.tileToWorld(spawnCandidate), Quaternion.identity);
+                        break;
+                    }
+                }
+            }
+        }
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
 
 
@@ -357,8 +386,7 @@ abstract class Model
     }
 
     protected abstract bool OnBoundary(int x, int y);
-    // public abstract System.Drawing.Bitmap Graphics();
-
+    
     protected static int[] DX = { -1, 0, 1, 0 };
     protected static int[] DY = { 0, 1, 0, -1 };
     static int[] opposite = { 2, 3, 0, 1 };
@@ -551,10 +579,10 @@ class SimpleTiledModel : Model
                     WFCTile tile = tiles[observed[x + y * FMX]];
                     if (tile.collides)
                     {
-                        collision.SetTile(new Vector3Int(x - FMX / 2, -y - 1 + FMY / 2, 0), tile.tile);
+                        collision.SetTile(new Vector3Int(x, -y, 0), tile.tile);
                     } else
                     {
-                        pathing.SetTile(new Vector3Int(x - FMX / 2, -y - 1 + FMY / 2, 0), tile.tile);
+                        pathing.SetTile(new Vector3Int(x, -y, 0), tile.tile);
                     }
 
 
