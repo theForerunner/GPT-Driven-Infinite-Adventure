@@ -38,7 +38,7 @@ class S(BaseHTTPRequestHandler):
         print("Received request: %s" % post_data)
         
         try:
-            message = json.load(post_data)
+            message = json.loads(post_data)
         except Exception as err:
             response['error'] = "invalid JSON: %s" % err
             self._set_headers(500)
@@ -107,7 +107,7 @@ class GameManager:
         else:
             self.generator = GPT2Generator()
         self.story_manager = StoryManager(self.generator)
-        self.prompt = "You are on a quest to defeat the evil dragon of Larion. You've heard he lives up at the north of the kingdom. You set on the path to defeat him and walk into a dark forest. You get into forest."
+        self.prompt = "You are on a quest to defeat the evil dragon of Larion. You've heard he lives up at the north of the kingdom. You set on the path to defeat him and walk into a dark forest. You get into the forest."
         self.context = "You are a knight living in the kingdom of Larion."
 
     def generate_result(self, action):
