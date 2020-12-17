@@ -1,4 +1,0 @@
-numpy
-tensorflow==1.14
-stanza
-gpt-2-simple
