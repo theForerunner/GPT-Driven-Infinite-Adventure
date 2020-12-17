@@ -28,3 +28,16 @@ Petrarch configuration: 						Xianda<br>
 Wave function generator configuration:				Garrett & Xianda<br>
 Player input to GPT2 input conversion:				Garrett<br>
 Deliverable Reports:						              Garrett & Xianda<br>
+
+## Installation
+* Python environment: python 3.7
+* Python libraries:
+  * numpy
+  * tensorflow-gpu == 1.14 or 1.15
+  * difflib
+  * textblob
+  * gpt-2-simple
+  * stanza
+ * GPT-2 model: 
+   download the model and put it under <path-to-project>/GPT-Driven-Infinite-Adventure/GPT/generator/models folder
+ 
