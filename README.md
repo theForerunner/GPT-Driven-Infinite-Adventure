@@ -42,4 +42,11 @@ Deliverable Reports:						              Garrett & Xianda<br>
    * download the model [torrent](docs/gpt2_model.torrent)
    * put it under <path-to-project>/GPT-Driven-Infinite-Adventure/GPT/generator/models folder
  * Unity
+## Execution
+### GPT-2 Server
+ * Enter <path-to-project>/GPT-Driven-Infinite-Adventure/GPT folder
+ * excute the following line in command line
+ '''
+ python gpt2_module.py
+ '''
  
