@@ -41,4 +41,5 @@ Deliverable Reports:						              Garrett & Xianda<br>
  * GPT-2 model: 
    * download the model [torrent](docs/gpt2_model.torrent)
    * put it under <path-to-project>/GPT-Driven-Infinite-Adventure/GPT/generator/models folder
+ * Unity
  
